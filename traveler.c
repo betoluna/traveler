@@ -17,7 +17,6 @@ typedef struct node {
 Listnode_ptr insert(Listnode_ptr, char *);
 void print(Listnode_ptr);
 static float percent(int);
-
     
 int main(int argc, char **argv) {
   char buf[INPUTSIZE]; // the incoming string from stdin
@@ -50,7 +49,7 @@ int main(int argc, char **argv) {
 Listnode_ptr insert(Listnode_ptr head, char *new_val) {
   // if list is empty 
   if(head == NULL) {
-    head = malloc(sizeof(struct node)); // check for NULL after call to malloc
+    head = malloc(sizeof(Listnode));
     head->value = new_val;
     head->next = NULL;
     return head;
@@ -58,7 +57,7 @@ Listnode_ptr insert(Listnode_ptr head, char *new_val) {
 
   // if incoming val is less than val at head, insert at front.    
   if(strcmp(new_val, head->value) < 0) {
-    Listnode_ptr new_head = malloc(sizeof(struct node));
+    Listnode_ptr new_head = malloc(sizeof(Listnode));
     new_head->value = new_val;
     new_head->next = head;
     return new_head;
@@ -78,7 +77,7 @@ Listnode_ptr insert(Listnode_ptr head, char *new_val) {
   }
 
   // insert when proper position found
-  Listnode_ptr new_node = malloc(sizeof(struct node));
+  Listnode_ptr new_node = malloc(sizeof(Listnode));
   new_node->value = new_val;
   new_node->next = current; // may or may not be NULL
   previous->next = new_node; // insert after previous
