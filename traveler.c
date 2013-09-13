@@ -22,6 +22,7 @@ int main(int argc, char **argv) {
   char buf[INPUTSIZE]; // the incoming string from stdin
   
   printf("Enter the states you have visited:\n");
+  // INPUT
   char *p = fgets(buf, INPUTSIZE, stdin);
   char *s = strstr(buf, "\n");
   if(s == NULL) {
@@ -39,7 +40,7 @@ int main(int argc, char **argv) {
     head = insert(head, token); // insert token in sorted list
     s = strtok(NULL, " "); // locate the next token
   }
-
+  // OUTPUT
   print(head);
 
   return 0;
@@ -85,6 +86,7 @@ Listnode_ptr insert(Listnode_ptr head, char *new_val) {
   return head;
 } // END insert()
 
+// OUTPUT
 void print(Listnode_ptr head) {
   Listnode_ptr temp = head;
   int visited = 0;
