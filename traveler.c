@@ -8,15 +8,16 @@
 #define INPUTSIZE 256
 #define STATES 50
 
-struct node *insert(struct node *, char *);
-void print(struct node *);
-static float percent(int);
-
 // a linked list node
-struct node {
+typedef struct node {
   char *value;
   struct node *next;
-};
+}Listnode, *Listnode_ptr;
+
+Listnode_ptr insert(Listnode_ptr, char *);
+void print(Listnode_ptr);
+static float percent(int);
+
     
 int main(int argc, char **argv) {
   char buf[INPUTSIZE]; // the incoming string from stdin
@@ -31,7 +32,7 @@ int main(int argc, char **argv) {
   }
 
   *s = '\0';
-  struct node *head;
+  Listnode_ptr head;
 
   s = strtok(buf, " ");
   while(s != NULL) {
@@ -46,7 +47,7 @@ int main(int argc, char **argv) {
 } // end main
 
 // insert string --if it's not already there, into sorted list
-struct node *insert(struct node *head, char *new_val) {
+Listnode_ptr insert(Listnode_ptr head, char *new_val) {
   // if list is empty 
   if(head == NULL) {
     head = malloc(sizeof(struct node)); // check for NULL after call to malloc
@@ -57,15 +58,15 @@ struct node *insert(struct node *head, char *new_val) {
 
   // if incoming val is less than val at head, insert at front.    
   if(strcmp(new_val, head->value) < 0) {
-    struct node *new_head = malloc(sizeof(struct node));  //check for NULL afterward
+    Listnode_ptr new_head = malloc(sizeof(struct node));
     new_head->value = new_val;
     new_head->next = head;
     return new_head;
   }
 
   // must traverse list to find proper location to insert
-  struct node *current = head;
-  struct node *previous = NULL;
+  Listnode_ptr current = head;
+  Listnode_ptr previous = NULL;
   // while new_val is greater than value pointed to by current
   while(current != NULL && strcmp(current->value, new_val) <= 0) {
     // Don't allow duplicates. If new_val is found, do nothing.
@@ -77,7 +78,7 @@ struct node *insert(struct node *head, char *new_val) {
   }
 
   // insert when proper position found
-  struct node *new_node = malloc(sizeof(struct node));
+  Listnode_ptr new_node = malloc(sizeof(struct node));
   new_node->value = new_val;
   new_node->next = current; // may or may not be NULL
   previous->next = new_node; // insert after previous
@@ -85,8 +86,8 @@ struct node *insert(struct node *head, char *new_val) {
   return head;
 } // END insert()
 
-void print(struct node *head) {
-  struct node *temp = head;
+void print(Listnode_ptr head) {
+  Listnode_ptr temp = head;
   int visited = 0;
   char c, *val;
   while(temp != NULL) {
