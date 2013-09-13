@@ -103,8 +103,7 @@ void print(struct node *head) {
     printf("\n");
   }
  
-  float percentVisited = percent(visited);
-  printf("You have visited %.0f%% of the United States.\n", percentVisited);
+  printf("You have visited %.0f%% of the United States.\n", percent(visited));
 }
 
 static float percent(int visited) {
