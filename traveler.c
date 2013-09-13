@@ -8,6 +8,10 @@
 #define INPUTSIZE 256
 #define STATES 50
 
+struct node *insert(struct node *, char *);
+void print(struct node *);
+static float percent(int);
+
 // a linked list node
 struct node {
   char *value;
